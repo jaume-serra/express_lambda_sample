@@ -1,7 +1,18 @@
 service: nodejs-aws-lambda
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
+  region: eu-west-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - lambda:*
+            - lambda:InvokeFunction
+            - lambda:GetFunction
+            - lambda:GetFunctionConfiguration
+          Resource: "*"
 functions:
   app:
     handler: dist/app.handler
